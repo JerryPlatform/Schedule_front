@@ -54,7 +54,7 @@ const linksList = [
     title: 'Docs',
     caption: 'quasar.dev',
     icon: 'school',
-    link: '/userCalendar'
+    link: '/#/userCalendar'
   }
 ];
 
