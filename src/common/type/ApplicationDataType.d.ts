@@ -1,0 +1,1 @@
+export type ApplicationDataType = {from: string, to: string} | string
