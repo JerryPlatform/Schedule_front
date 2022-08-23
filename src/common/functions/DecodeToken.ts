@@ -1,5 +1,5 @@
 import JwtService from "src/common/jwt.service";
-var Buffer = require('buffer/').Buffer
+import { Buffer } from "buffer";
 
 export interface tokenInterface {
   account: string | null,

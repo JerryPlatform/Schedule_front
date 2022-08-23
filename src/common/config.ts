@@ -9,12 +9,12 @@ interface DevServer {
 
 const devServer: DevServer = {
   JSM: {
-    ip: '172.30.1.91',
+    ip: '192.168.20.87',
     port: 8084
   }
 };
 
-const useServer: string = "";
+const useServer: string = "JSM";
 
 export const API_URL =
   useServer !== ''

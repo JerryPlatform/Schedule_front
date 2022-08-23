@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     async tests() {
-      await this.apiController('GET', 'v1/member/all')
+      await this.apiController('POST', 'v1/member/login', { account: 'seongmin', password: 'password'})
         .then(value => {
           this.dat = value;
         })
