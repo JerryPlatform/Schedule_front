@@ -8,6 +8,7 @@ import BRNChkValidation from 'src/common/functions/BRNChkValidation';
 import { emailValidation, phoneValidation, passwordValidation, phoneFormatChanger } from 'src/common/functions/ValidationChk';
 import downloadArrayBuffer from 'src/common/functions/DownloadArrayBuffer';
 import MoneyConverter from 'src/common/functions/MoneyConverter';
+// @ts-ignore
 import { createDeviceDetector, IDeviceDetector } from "next-vue-device-detector";
 
 //set interface of function
