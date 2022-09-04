@@ -23,4 +23,4 @@ const useServer: string = "";
 export const API_URL =
   useServer !== ''
   ? `http://${devServer[useServer].ip}:${devServer[useServer].port}/`
-  : `http://192.168.20.95:8084/`
+  : `http://121.151.25.182:8000/`
