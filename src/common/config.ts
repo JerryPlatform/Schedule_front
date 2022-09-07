@@ -23,4 +23,4 @@ const useServer: string = "";
 export const API_URL =
   useServer !== ''
   ? `http://${devServer[useServer].ip}:${devServer[useServer].port}/`
-  : `http://schedule-openapi.jerryplatform.dev/`
+  : `http://121.151.25.182:8000/`
