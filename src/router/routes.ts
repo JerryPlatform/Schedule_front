@@ -1,23 +1,26 @@
 import { RouteRecordRaw } from 'vue-router';
 
-import Login from 'pages/auth/Login.vue';
+import MainLayout from "layouts/MainLayout.vue";
 
+import IndexPage from "pages/IndexPage.vue";
+import Login from 'pages/auth/Login.vue';
 import UserCalendar from 'pages/calendar/userCalendar.vue';
+import AuthLayout from "layouts/AuthLayout.vue";
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/auth',
-    component: () => import('layouts/AuthLayout.vue'),
+    component: AuthLayout,
     children: [
       { path: 'login', component: Login }
     ],
   },
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: MainLayout,
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: "userCalendar", component: UserCalendar }
+      { path: '', redirect : '/auth/login' },
+      { path: 'userCalendar', component: UserCalendar }
     ],
   },
 
