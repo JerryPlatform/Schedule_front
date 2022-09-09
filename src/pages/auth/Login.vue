@@ -17,7 +17,7 @@
           />
           <q-input
             filled
-            v-model="password"
+            v-model="userPassword"
             type="password"
             label="비밀번호"
             hint="비밀번호를 입력해주세요"
@@ -51,7 +51,7 @@ export default defineComponent({
   data() {
     return {
       userId: "",
-      password: ""
+      userPassword: ""
     }
   }
 })
