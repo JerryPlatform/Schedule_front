@@ -15,10 +15,14 @@ const devServer: DevServer = {
   JSM2: {
     ip: '192.168.20.95',
     port: 8084
+  },
+  JSM3: {
+    ip: '172.30.1.23',
+    port: 8000
   }
 };
 
-const useServer: string = "";
+const useServer: string = "JSM3";
 
 export const API_URL =
   useServer !== ''
