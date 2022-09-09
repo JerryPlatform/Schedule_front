@@ -16,12 +16,7 @@ interface LoginCredentials {
 }
 
 interface LoginResponse {
-  id:             Nullable<number>
-  account:        Nullable<string>
-  name:           Nullable<string>
-  role:           Nullable<string>
   token:          Nullable<string>
-  valid:          Nullable<boolean>
 }
 
 export const useAuthStore = defineStore('AuthStore', {
@@ -40,8 +35,9 @@ export const useAuthStore = defineStore('AuthStore', {
   actions: {
     login(credentials: LoginCredentials): Promise<LoginResponse> {
       return new Promise(resolve => {
-        apiController('POST', 'v1/login', credentials)
+        apiController('POST', 'v1/member/login', credentials)
           .then(({contents, response}: { contents: LoginResponse, response: any }) => {
+            console.log(contents)
             switch (response.status) {
               case 401:
                 alert("인증이 실패했습니다.");
