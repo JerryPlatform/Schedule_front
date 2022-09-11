@@ -1,21 +1,28 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" @mousedown="downMouse">
     <q-header elevated>
       <q-toolbar>
         <q-btn
-          flat
-          dense
-          round
           icon="menu"
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
 
         <q-toolbar-title>
-          Quasar App
+          <span @click="$router.push('/')" class="cursor-pointer">
+            Condition
+          </span>
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn class="bg-white" text-color="dark" icon="account_circle" @click.prevent="() => {userChip = !userChip}">
+          <span class="q-mx-sm text-weight-bold">
+            {{decodeToken().name}} 님 반갑습니다.
+          </span>
+
+          <q-menu :offset="[-2, 5]">
+            <UserInfo />
+          </q-menu>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -25,12 +32,6 @@
       bordered
     >
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
@@ -42,19 +43,51 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-footer class="bg-grey">
+      <q-toolbar class="text-caption">
+        Copyright 2022. JerryPlatform
+      </q-toolbar>
+    </q-footer>
   </q-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, Ref, ref } from 'vue';
+import { Depth } from 'src/common/type/type.sideNav';
 import EssentialLink from 'components/EssentialLink.vue';
+import decodeToken from 'src/common/functions/DecodeToken';
+import UserInfo from 'src/components/UserInfo.vue';
+import { useAuthStore } from "stores/auth-store";
+import { useRouter } from "vue-router";
 
-const linksList = [
+const linksList: Array<Depth> = [
   {
-    title: 'Docs',
+    title: '컨디션',
     caption: 'quasar.dev',
-    icon: 'school',
-    link: '/#/userCalendar'
+    icon: 'edit_calendar',
+    expansion: [
+      {
+        title: '달력1',
+        link: '/userCalendar1'
+      },
+      {
+        title: '달력2',
+        link: '/userCalendar2'
+      }
+    ]
+  },
+  {
+    title: '옵션2',
+    caption: 'quasar.dev',
+    icon: 'content_paste_search',
+    link: '/userCalendar'
+  },
+  {
+    title: '옵션3',
+    caption: 'quasar.dev',
+    icon: 'content_paste_search',
+    link: '/userCalendar'
   }
 ];
 
@@ -62,19 +95,53 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    EssentialLink,
+    UserInfo
   },
 
   setup () {
-    const leftDrawerOpen = ref(false)
+    const $store = useAuthStore();
+    const $router = useRouter();
+
+    const essentialLinks = ref([]) as Ref<Depth[]>;
+    const leftDrawerOpen = ref(false);
+    const userChip = ref(false);
+
+    essentialLinks.value = linksList;
+
+    function toggleLeftDrawer () {
+      leftDrawerOpen.value = !leftDrawerOpen.value
+    }
+
+    async function downMouse() {
+
+      if(!$store.isValidity) {
+        await $store.logout();
+        await $router.push({name: 'Login'});
+        alert("인증이 만료되었습니다. 다시 로그인해 주세요.");
+      }
+    }
 
     return {
-      essentialLinks: linksList,
+      essentialLinks,
       leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      userChip,
+
+      toggleLeftDrawer,
+      downMouse
+
     }
   }
 });
 </script>
+
+<style lang="sass" scoped>
+#q-app
+  >.q-layout
+    >.q-page-container
+      >div
+        max-height: calc(100vh - 100px)
+        height: calc(100vh - 100px)
+        overflow-y: auto
+</style>
+
