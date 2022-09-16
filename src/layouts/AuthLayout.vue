@@ -1,6 +1,7 @@
 <template>
-  <q-layout class="bg-primary">
-    <router-view />
+  <q-layout>
+    <q-img src="/src/assets/auth_background.jpg" class="tests"></q-img>
+    <router-view style="z-index: -1" />
   </q-layout>
 </template>
 
@@ -11,7 +12,11 @@ export default defineComponent ({
   name: "AuthLayout"
 })
 </script>
-
-<style lang="sass">
-
+<style>
+.tests {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
 </style>
