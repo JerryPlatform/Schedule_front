@@ -1,6 +1,6 @@
 <template>
   <q-layout>
-    <q-img src="/src/assets/auth_background.jpg" class="tests"></q-img>
+    <q-img src="~assets/auth_background.jpg" class="tests"></q-img>
     <router-view style="z-index: -1" />
   </q-layout>
 </template>
