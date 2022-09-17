@@ -22,7 +22,7 @@ const devServer: DevServer = {
   }
 };
 
-const useServer: string = "JSM_MAC";
+const useServer: string = "";
 
 export const API_URL =
   useServer !== ''
