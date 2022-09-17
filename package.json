@@ -2,8 +2,8 @@
   "name": "schedule_front",
   "version": "0.0.1",
   "description": "A Quasar Project",
-  "productName": "juniper",
-  "author": "juniper",
+  "productName": "CONDITION",
+  "author": "CONDITION",
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"
