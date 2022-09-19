@@ -1,7 +1,7 @@
 <template>
   <q-layout>
-    <q-img src="~assets/auth_background.jpg" class="tests"></q-img>
-    <router-view style="z-index: -1" />
+    <q-img src="~assets/auth_background.jpg" class="img"></q-img>
+    <router-view />
   </q-layout>
 </template>
 
@@ -13,10 +13,8 @@ export default defineComponent ({
 })
 </script>
 <style>
-.tests {
+.img {
   position: absolute;
-  width: 100%;
-  height: 100%;
   opacity: 0.8;
 }
 </style>
