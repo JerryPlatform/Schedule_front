@@ -48,11 +48,13 @@
     </q-card-section>
   </q-card>
   <q-card class="sub-card">
-    <div class="q-pt-md" style="text-align: center">계정이 없으신가요? <a class="text-bold" style="cursor: pointer; color: darkblue;">가입하기</a></div>
+    <div class="q-pt-md" style="text-align: center">계정이 없으신가요? <a class="text-bold"
+                                                                  style="cursor: pointer; color: darkblue;">가입하기</a>
+    </div>
   </q-card>
   <div class="sub-card q-pt-md text-center">
     <p>앱을 다운로드 하세요</p>
-    <q-img src="~assets/googlePlay-download-icon.png" class="img" />
+    <q-img src="~assets/googlePlay-download-icon.png" class="img"/>
   </div>
 </template>
 
@@ -80,15 +82,23 @@ export default defineComponent({
           password: userPassword.value
         })
         .then((content) => {
-          if (content.token === null) {
-            alert("2차 로그인 필요");
+          if (content) {
+            $q.notify({
+              message: '로그인 성공',
+              color: 'green-4',
+              textColor: 'white',
+              icon: 'check_circle',
+              position: 'bottom'
+            });
+            $router.push('/userCalendar');
           } else {
             $q.notify({
-              message: "로그인 되었습니다.",
-              icon: "doen_all",
-              color: "primary",
+              message: '패스워드를 잘못 입력하였습니다.',
+              color: 'red-4',
+              textColor: 'white',
+              icon: 'error',
+              position: 'bottom'
             });
-            $router.push('/userCalendar')
           }
         })
     }
@@ -110,17 +120,20 @@ export default defineComponent({
   width: 400px;
   height: 400px;
 }
+
 .sub-card {
   margin-left: 30px;
   width: 400px;
   height: 50px;
 }
+
 .line {
   display: flex;
   align-items: center;
   color: rgba(0, 0, 0, 0.35);
   margin: 15px 0px;
 }
+
 .line::before,
 .line::after {
   content: "";
@@ -129,6 +142,7 @@ export default defineComponent({
   height: 1px;
   margin: 0px 16px;
 }
+
 .img {
   border-radius: 10%;
   width: 50%;

@@ -40,22 +40,12 @@ export const useAuthStore = defineStore('AuthStore', {
             console.log(contents)
             switch (response.status) {
               case 401:
-                alert("인증이 실패했습니다.");
-                break;
               case 402:
-                alert("계정이 잠겼습니다. 관리자에게 문의해주세요.");
-                break;
               case 433:
-                alert("로그인이 실패했습니다.");
-                break;
               case 434:
-                alert("접근 권한이 없습니다.");
-                break;
               case 435:
-                alert("존재하지 않은 사용자입니다.");
-                break;
               case 500:
-                alert("패스워드를 잘못 입력하셨습니다.");
+                resolve(contents);
                 break;
               default:
                 JwtService.saveToken(contents.token as string);
