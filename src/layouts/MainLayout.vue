@@ -1,54 +1,30 @@
 <template>
-  <q-layout view="lHh Lpr lFf" @mousedown="downMouse">
-    <q-header elevated>
+  <q-layout view="hHh LpR fFf">
+
+    <q-header elevated class="bg-black" height-hint="98">
       <q-toolbar>
-        <q-btn
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
         <q-toolbar-title>
-          <span @click="$router.push('/')" class="cursor-pointer">
-            Condition
-          </span>
+
+          <q-tabs class="q-pa-md" align="center">
+            <q-avatar size="md">
+              <img src="~/assets/black-icon.png">
+            </q-avatar>
+            <q-route-tab to="/index" class="cursor-pointer" label="Page One" />
+            <q-route-tab to="/userCalendar" label="Page Two" />
+            <q-route-tab to="/index" label="Page Three" />
+          </q-tabs>
+
         </q-toolbar-title>
-
-        <q-btn class="bg-white" text-color="dark" icon="account_circle" @click.prevent="() => {userChip = !userChip}">
-          <span class="q-mx-sm text-weight-bold">
-            {{decodeToken().name}} 님 반갑습니다.
-          </span>
-
-          <q-menu :offset="[-2, 5]">
-            <UserInfo />
-          </q-menu>
-        </q-btn>
       </q-toolbar>
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
 
-    <q-footer class="bg-grey">
-      <q-toolbar class="text-caption">
-        Copyright 2022. JerryPlatform
-      </q-toolbar>
+    <q-footer elevated class="bg-grey-8 text-white">
     </q-footer>
+
   </q-layout>
 </template>
 
@@ -60,36 +36,6 @@ import decodeToken from 'src/common/functions/DecodeToken';
 import UserInfo from 'src/components/UserInfo.vue';
 import { useAuthStore } from "stores/auth-store";
 import { useRouter } from "vue-router";
-
-const linksList: Array<Depth> = [
-  {
-    title: '컨디션',
-    caption: 'quasar.dev',
-    icon: 'edit_calendar',
-    expansion: [
-      {
-        title: '달력1',
-        link: '/userCalendar1'
-      },
-      {
-        title: '달력2',
-        link: '/userCalendar2'
-      }
-    ]
-  },
-  {
-    title: '옵션2',
-    caption: 'quasar.dev',
-    icon: 'content_paste_search',
-    link: '/userCalendar'
-  },
-  {
-    title: '옵션3',
-    caption: 'quasar.dev',
-    icon: 'content_paste_search',
-    link: '/userCalendar'
-  }
-];
 
 export default defineComponent({
   name: 'MainLayout',
@@ -107,29 +53,10 @@ export default defineComponent({
     const leftDrawerOpen = ref(false);
     const userChip = ref(false);
 
-    essentialLinks.value = linksList;
-
-    function toggleLeftDrawer () {
-      leftDrawerOpen.value = !leftDrawerOpen.value
-    }
-
-    async function downMouse() {
-
-      if(!$store.isValidity) {
-        await $store.logout();
-        await $router.push({name: 'Login'});
-        alert("인증이 만료되었습니다. 다시 로그인해 주세요.");
-      }
-    }
-
     return {
       essentialLinks,
       leftDrawerOpen,
       userChip,
-
-      toggleLeftDrawer,
-      downMouse
-
     }
   }
 });

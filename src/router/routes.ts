@@ -20,6 +20,7 @@ const routes: RouteRecordRaw[] = [
     component: MainLayout,
     children: [
       { path: '', redirect : '/auth/login' },
+      { path: 'index', component: IndexPage },
       { path: 'userCalendar', component: UserCalendar }
     ],
   },
