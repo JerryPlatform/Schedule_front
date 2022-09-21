@@ -4,7 +4,7 @@
       <a style="cursor: pointer">𝓒𝓞𝓝𝓓𝓘𝓣𝓘𝓞𝓝</a>
     </q-card-section>
     <q-card-section class="q-px-xl">
-      <q-form ref="loginForm" @submit.passive="onSubmit" class="q-gutter-sm">
+      <q-form @submit="onSubmit" class="q-gutter-sm">
         <q-input
           placeholder="사용자 계정"
           v-model="userId"
@@ -65,7 +65,7 @@ import {useQuasar} from "quasar";
 import {useRouter} from 'vue-router';
 
 export default defineComponent({
-  name: "Login",
+  name: "login",
   setup() {
     const $store = useAuthStore();
     const $router = useRouter();

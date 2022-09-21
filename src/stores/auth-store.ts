@@ -37,7 +37,6 @@ export const useAuthStore = defineStore('AuthStore', {
       return new Promise(resolve => {
         apiController('POST', 'v1/member/login', credentials)
           .then(({contents, response}: { contents: LoginResponse, response: any }) => {
-            console.log(contents)
             switch (response.status) {
               case 401:
               case 402:
